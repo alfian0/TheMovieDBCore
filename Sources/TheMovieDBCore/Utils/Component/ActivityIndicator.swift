@@ -11,8 +11,8 @@ import UIKit
 public struct ActivityIndicator: UIViewRepresentable {
   @Binding var isAnimating: Bool
 
-  public init(isAnimating: Bool) {
-    self.isAnimating = isAnimating
+  public init(isAnimating: Binding<Bool>) {
+    self._isAnimating = isAnimating
   }
   
   public func makeUIView(context: Context) -> UIActivityIndicatorView {
