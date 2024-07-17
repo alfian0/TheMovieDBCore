@@ -25,7 +25,8 @@ public extension Request {
   var headers: [String: String]? { return nil }
 
   func asURLRequest(baseURL: String) -> URLRequest? {
-    guard var urlComponents = URLComponents(string: baseURL) else { return nil }
+    guard let url = URL(string: baseURL),
+          var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return nil }
     urlComponents.path = "\(urlComponents.path)\(path)"
     urlComponents.queryItems = addQueryItems(queryParams: queryParams)
     guard let finalURL = urlComponents.url else { return nil }
