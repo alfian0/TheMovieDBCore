@@ -11,6 +11,8 @@ import UIKit
 public struct ActivityIndicator: UIViewRepresentable {
   @Binding var isAnimating: Bool
 
+  public init() {}
+  
   public func makeUIView(context: Context) -> UIActivityIndicatorView {
     let indicator = UIActivityIndicatorView(style: .medium)
     indicator.hidesWhenStopped = true
@@ -27,7 +29,8 @@ public struct ActivityIndicator: UIViewRepresentable {
 }
 
 public struct ProgressView: UIViewRepresentable {
-
+  public init() {}
+  
   public func makeUIView(context: Context) -> UIActivityIndicatorView {
     let indicator = UIActivityIndicatorView(style: .medium)
     indicator.hidesWhenStopped = true
