@@ -9,7 +9,11 @@ import UIKit
 import SwiftUI
 
 public struct SearchBar: UIViewRepresentable {
-    @Binding var text: String
+  @Binding var text: String
+  
+  public init(text: Binding<String>) {
+    self._text = text
+  }
 
   public class Coordinator: NSObject, UISearchBarDelegate {
     @Binding var text: String
