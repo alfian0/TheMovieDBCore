@@ -53,6 +53,23 @@ public final class CoreDataClient {
       }
       .eraseToAnyPublisher()
   }
+  
+  public func delete<T: NSManagedObject>(_ type: T.Type, predicate: [String: Any]? = nil) -> AnyPublisher<[T], Error> {
+    return fetchRequest(type, predicate: predicate)
+      .flatMap { [weak self] objectsToDelete -> AnyPublisher<Void, Error> in
+          guard let self = self else {
+              return Fail(error: NSError(domain: "CoreDataClientError", code: -1, userInfo: nil)).eraseToAnyPublisher()
+          }
+          for object in objectsToDelete {
+              self.container.viewContext.delete(object)
+          }
+          return self.saveData()
+      }
+      .flatMap { [weak self] _ in
+        self?.fetchRequest(type) ?? Fail(error: NSError(domain: "CoreDataClientError", code: -1, userInfo: nil)).eraseToAnyPublisher()
+      }
+      .eraseToAnyPublisher()
+  }
 
   private func saveData() -> AnyPublisher<Void, Error> {
     Future { [weak self] promise in
