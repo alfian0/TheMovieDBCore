@@ -8,12 +8,12 @@
 import Foundation
 
 public protocol DeepLink {
-    var url: URL { get }
-    func handle()
+  var url: URL { get }
+  func handle()
 }
 
 public protocol DeepLinkManager {
-    func handleDeepLink(url: URL)
+  func handleDeepLink(url: URL)
 }
 
 public class DefaultDeepLinkManager: DeepLinkManager {
