@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 import Alamofire
-import TheMovieDBCore
 
 public final class AlamofireClient: HTTPClient {
   struct InvalidHTTPResponseError: Error {}
@@ -33,7 +32,7 @@ public final class AlamofireAuthenticatedClient: HTTPClient {
   private let client: HTTPClient
   private let apiKey: String
 
-  init(client: HTTPClient = URLSession.shared, apiKey: String = APIConstans.apiKey) {
+  init(client: HTTPClient = URLSession.shared, apiKey: String) {
     self.client = client
     self.apiKey = apiKey
   }
