@@ -8,8 +8,8 @@
 import Foundation
 
 public protocol DeepLink {
-  var url: URL { get }
-  func handle()
+  var path: String { get }
+  func handle(url: URL)
 }
 
 public protocol DeepLinkManager {
@@ -24,10 +24,10 @@ public class DefaultDeepLinkManager: DeepLinkManager {
   }
     
   public func handleDeepLink(url: URL) {
-    guard let deepLink = deepLinks.first(where: { $0.url.host == url.host }) else {
+    guard let deepLink = deepLinks.first(where: { $0.path == url.host }) else {
       print("No handler for URL: \(url)")
       return
     }
-    deepLink.handle()
+    deepLink.handle(url: url)
   }
 }
