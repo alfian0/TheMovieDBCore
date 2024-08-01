@@ -24,7 +24,7 @@ public class DefaultDeepLinkManager: DeepLinkManager {
   }
     
   public func handleDeepLink(url: URL) {
-    guard let deepLink = deepLinks.first(where: { $0.url == url }) else {
+    guard let deepLink = deepLinks.first(where: { $0.url.scheme == url.scheme }) else {
       print("No handler for URL: \(url)")
       return
     }
