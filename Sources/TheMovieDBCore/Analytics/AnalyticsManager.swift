@@ -21,21 +21,31 @@ public protocol AnalyticsManager {
 }
 
 public class DefaultAnalyticsManager: AnalyticsManager {
-  private var services: [AnalyticsService]
-  
-  public init(services: [AnalyticsService]) {
-    self.services = services
-  }
+    private var services: [AnalyticsService]
     
-  public func logEvent(_ name: String, parameters: [String: Any]?) {
-    services.forEach { $0.logEvent(name, parameters: parameters) }
-  }
+    // Singleton instance
+    public static let shared = DefaultAnalyticsManager(services: [])
     
-  public func setUserId(_ userId: String) {
-    services.forEach { $0.setUserId(userId) }
-  }
+    // Private initializer to prevent creating additional instances
+    private init(services: [AnalyticsService]) {
+        self.services = services
+    }
     
-  public func setUserProperty(_ name: String, value: String) {
-    services.forEach { $0.setUserProperty(name, value: value) }
-  }
+    // Method to update services dynamically
+    public func updateServices(_ services: [AnalyticsService]) {
+        self.services = services
+    }
+    
+    public func logEvent(_ name: String, parameters: [String: Any]?) {
+        services.forEach { $0.logEvent(name, parameters: parameters) }
+    }
+    
+    public func setUserId(_ userId: String) {
+        services.forEach { $0.setUserId(userId) }
+    }
+    
+    public func setUserProperty(_ name: String, value: String) {
+        services.forEach { $0.setUserProperty(name, value: value) }
+    }
 }
+
