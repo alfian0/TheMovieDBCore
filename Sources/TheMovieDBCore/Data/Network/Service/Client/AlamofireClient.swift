@@ -32,7 +32,7 @@ public final class AlamofireAuthenticatedClient: HTTPClient {
   private let client: HTTPClient
   private let apiKey: String
 
-  init(client: HTTPClient = URLSession.shared, apiKey: String) {
+  init(client: HTTPClient = AlamofireClient(), apiKey: String) {
     self.client = client
     self.apiKey = apiKey
   }
