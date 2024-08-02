@@ -20,7 +20,7 @@ enum EventType: String {
   case feedback = "feedback"
 }
 
-extension String {
+public extension String {
   static var screenView = EventType.screenView.rawValue
   static var sessionStart = EventType.sessionStart.rawValue
   static var sessionEnd = EventType.sessionEnd.rawValue
